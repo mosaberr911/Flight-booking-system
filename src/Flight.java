@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Flight {
-    private int flightId  ;
+    private String flightId  ;
     private String arrivalAirport ;
     private String departureAirport ;
     private LocalDate arrivalDate ;
@@ -11,7 +12,7 @@ public class Flight {
     // default constructor
 
     public Flight() {
-        this.flightId = 0 ;
+        this.flightId = "N/A" ;
         this.arrivalAirport = "NA" ;
         this.departureAirport = "NA" ;
         this.arrivalDate = null ;
@@ -20,7 +21,7 @@ public class Flight {
 
     // parameterized constructor
 
-    public Flight(int flightId, String arrivalAirport, String departureAirport, LocalDate arrivalDate, LocalDate departureDate) {
+    public Flight(String flightId, String arrivalAirport, String departureAirport, LocalDate arrivalDate, LocalDate departureDate) {
         this.flightId = flightId;
         this.arrivalAirport = arrivalAirport;
         this.departureAirport = departureAirport;
@@ -30,9 +31,10 @@ public class Flight {
 
     // setters
 
+    // Use UUID class to generate unique flight id
 
-    public void setFlightId(int flightId) {
-        this.flightId = flightId;
+    public void setFlightId() {
+        this.flightId = 'A' + UUID.randomUUID().toString().substring( 0 , 6 ) ;
     }
 
     public void setArrivalAirport(String arrivalAirport) {
@@ -53,7 +55,7 @@ public class Flight {
 
     // getters
 
-    public int getFlightId() {
+    public String getFlightId() {
         return flightId;
     }
 
@@ -72,16 +74,25 @@ public class Flight {
     public LocalDate getDepartureDate() {
         return departureDate;
     }
-    // override tostring method to print Flights arraylists
+
+    // override toString method to print Flights arraylist
 
     @Override
     public String toString() {
         return "Flight{" +
-                "flightId=" + flightId +
-                ", arrivalAirport = '" + arrivalAirport + '\'' +
-                ", departureAirport = '" + departureAirport + '\'' +
-                ", arrivalDate = " + arrivalDate +
-                ", departureDate = " + departureDate +
+                "flightId='" + flightId + '\'' +
+                ", arrivalAirport='" + arrivalAirport + '\'' +
+                ", departureAirport='" + departureAirport + '\'' +
+                ", arrivalDate=" + arrivalDate +
+                ", departureDate=" + departureDate +
                 '}';
+    }
+
+    public String displayFlightDetails(){
+        return "Flight id : " + flightId + "\n"
+                +"Departure Airport : " + departureAirport + "\n"
+                +"Arrival Airport : " + arrivalAirport + "\n"
+                +"Departure Date : " + departureDate + "\n"
+                +"Arrival Date : " + arrivalDate + "\n" ;
     }
 }
